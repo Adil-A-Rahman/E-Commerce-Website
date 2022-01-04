@@ -27,20 +27,20 @@ exports.registerUser = catchAsyncErrors(async (req, res, next)=>{
 //Login Users
 exports.loginUser =  catchAsyncErrors(async (req, res, next)=>{
 
-    const {email, password} = req.body
+    const {email, password} = req.body;
 
     //Checking if the user has given the email and password both
     if (!email || !password){
         return next(new ErrorHander("Please Enter Email and Password", 400))
     }
 
-    const user = User.findOne({email}).select("+password");
+    const user = await User.findOne({email}).select("+password");
 
     if(!user){
         return next(new ErrorHander("Invalid Email or Password", 401))
     }
 
-    const isPasswordMatched = user.comparePassword(password);
+    const isPasswordMatched = await user.comparePassword(password);
     
     if(!isPasswordMatched){
         return next(new ErrorHander("Invalid Email or Password", 401))
@@ -54,7 +54,7 @@ exports.loginUser =  catchAsyncErrors(async (req, res, next)=>{
     });
 });
 
-//Get all users
+//Get all users (Admin)
 exports.getAllUsers = catchAsyncErrors(async (req, res)=>{
     
     const userCount = await User.countDocuments();

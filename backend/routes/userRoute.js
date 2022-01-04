@@ -9,7 +9,7 @@ router.route("/register").post(registerUser);
 //Login Users
 router.route("/login").post(loginUser);
 
-//Get all users
+//Get all users (Admin)
 router.route("/users").get(getAllUsers);
 
 
