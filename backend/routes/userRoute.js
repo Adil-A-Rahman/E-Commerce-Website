@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, getAllUsers, loginUser } = require("../controllers/userController");
+const { registerUser, getAllUsers, loginUser, logout } = require("../controllers/userController");
 
 const router = express.Router();
 
@@ -12,7 +12,8 @@ router.route("/login").post(loginUser);
 //Get all users (Admin)
 router.route("/users").get(getAllUsers);
 
-
+//Logging users out
+router.route("/logout").get(logout);
 
 
 
