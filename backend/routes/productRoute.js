@@ -1,18 +1,19 @@
 const express = require("express");
 const { getAllProducts, createProduct, updateProduct, deleteProduct, getProductDetails } = require("../controllers/productController");
-const { isAuthenticatedUser } = require("../middleware/auth");
-//const { create } = require("../models/productModel");
+const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
 
-router.route("/products").get(getAllProducts);
+//Get all products
+router.route("/products").get(isAuthenticatedUser, authorizeRoles("admin"), getAllProducts);
 
-router.route("/product/:id").get(getProductDetails);
+//Add new products
+router.route("/product/new").post(isAuthenticatedUser,authorizeRoles("admin"), createProduct);
 
-router.route("/product/new").post(isAuthenticatedUser, createProduct);
-
-router.route("/product/:id").put(updateProduct);
-
-router.route("/product/:id").delete(deleteProduct);
+//CRUD on specific products
+router.route("/product/:id")
+    .get(getProductDetails)                         // Get  a  specific  product
+    .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)        // Update a specific product
+    .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);    // Delete a specific product
 
 module.exports = router
