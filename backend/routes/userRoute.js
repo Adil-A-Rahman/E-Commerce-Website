@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, getAllUsers, loginUser, logout, forgotPassword } = require("../controllers/userController");
+const { registerUser, getAllUsers, loginUser, logout, forgotPassword, resetPassword } = require("../controllers/userController");
 
 const router = express.Router();
 
@@ -9,8 +9,11 @@ router.route("/register").post(registerUser);
 //Login Users
 router.route("/login").post(loginUser);
 
-// Password reset route
+// Forgot Password route
 router.route("/password/forgot").post(forgotPassword);
+
+// Reset Password
+router.route("/password/reset/:token").put(resetPassword);
 
 //Get all users (Admin)
 router.route("/users").get(getAllUsers);
@@ -18,15 +21,5 @@ router.route("/users").get(getAllUsers);
 //Logging users out
 router.route("/logout").get(logout);
 
-
-
-
-// router.route("/product/:id").get(getProductDetails);
-
-
-
-// router.route("/product/:id").put(updateProduct);
-
-// router.route("/product/:id").delete(deleteProduct);
 
 module.exports = router
