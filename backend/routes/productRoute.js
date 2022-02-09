@@ -4,16 +4,18 @@ const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
 
-//Get all products
+//Admin: Get all products
 router.route("/products").get(isAuthenticatedUser, authorizeRoles("admin"), getAllProducts);
 
-//Add new products
+//Admin: Add new products
 router.route("/product/new").post(isAuthenticatedUser,authorizeRoles("admin"), createProduct);
 
-//CRUD on specific products
+//Admin: CRUD on specific products
 router.route("/product/:id")
-    .get(getProductDetails)                         // Get  a  specific  product
     .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)        // Update a specific product
     .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);    // Delete a specific product
+
+// Non-admin: Get a specific product
+router.route("/product/:id").get(getProductDetails);
 
 module.exports = router
