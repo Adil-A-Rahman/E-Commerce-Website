@@ -1,5 +1,5 @@
 const express = require("express");
-const { newOrder } = require("../controllers/orderController");
+const { newOrder, myOrders, getSingleOrder } = require("../controllers/orderController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
@@ -7,4 +7,10 @@ const router = express.Router();
 //Create an order
 router.route("/order/new").post(isAuthenticatedUser, newOrder)
 
-module.exports = router
+// Get an orders
+router.route("/order/:id").get(isAuthenticatedUser, getSingleOrder);
+
+// Get a user orders
+router.route("/orders/me").get(isAuthenticatedUser, myOrders)
+
+module.exports = router;
