@@ -9,7 +9,7 @@ function Footer() {
         <footer id='footer'>
             <div className="leftFooter">
                 <h4>DOWNLOAD OUR APP</h4>
-                <p>Download App for Android and IOS mobile phone</p>
+                <p>Download for Android and IOS</p>
                 <img src={playStore} alt="playstore" />
                 <img src={appStore} alt="appstore" />
             </div>
@@ -17,7 +17,7 @@ function Footer() {
             <div className="midFooter">
                 <h1>ECOMMERCE</h1>
                 <p>Cheap and affordable 😊</p>
-                <p>Copyrights 2021 &copy; Adil</p>
+                <p>Copyrights 2022 &copy; Adil</p>
             </div>
 
             <div className="rightFooter">
