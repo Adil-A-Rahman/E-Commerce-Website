@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import './Search.css'
 
-const Search = ({ history }) => {
+const Search = () => {
+
+    let navigate = useNavigate();
 
     const [keyword, setKeyword] = useState('');
 
@@ -10,9 +13,9 @@ const Search = ({ history }) => {
         e.preventDefault();
         
         if(keyword.trim()){
-            history.push(`/products/${keyword}`)
+            navigate(`/products/${keyword}`)
         }else{
-            history.push('/products');
+            navigate('/products');
         }
     }
 
