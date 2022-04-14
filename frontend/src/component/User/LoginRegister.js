@@ -8,8 +8,9 @@ import FaceIcon from '@mui/icons-material/Face'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, register, clearError } from '../../actions/userAction'
 import { useAlert } from 'react-alert'
+import MetaData from '../layout/MetaData'
 
-const LoginRegister = ({  history }) => {
+const LoginRegister = () => {
     const dispatch = useDispatch()
     const alert = useAlert()
     let navigate = useNavigate()
@@ -70,11 +71,10 @@ const LoginRegister = ({  history }) => {
             alert.error(error)
             dispatch(clearError())
         }
-
         if(isAuthenticated){
-            navigate('/account',{ replace: true })
+            navigate('/account',{replace: true})
         }
-    }, [dispatch, error, alert, history, isAuthenticated])
+    }, [dispatch, error, alert, navigate, isAuthenticated])
     
 
     const switchTabs = (e, tab) => {
@@ -94,6 +94,7 @@ const LoginRegister = ({  history }) => {
     
     return (<Fragment> {loading ? <Loader/> : 
         <Fragment>
+            <MetaData title={'Login - Ecommerce '} />
             <div className='LoginRegisterContainer'>
                 <div className='LoginRegisterBox'>
                     <div>
