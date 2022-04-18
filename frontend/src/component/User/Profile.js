@@ -1,21 +1,29 @@
 import React, { Fragment, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { loadUser } from '../../actions/userAction'
 import Loader from '../layout/Loader/Loader'
 import MetaData from '../layout/MetaData'
 import './Profile.css'
 
 const Profile = () => {
 
+    // const dispatch = useDispatch();
     const { user, loading, isAuthenticated } = useSelector( state => state.user )
 
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        if(!isAuthenticated){
-            navigate('/login', {replace: true})
-        }
-    }, [navigate, isAuthenticated])
+    // const navigate = useNavigate()
+    // useEffect(()=>{
+    //     console.log(isAuthenticated);
+    //     // dispatch(loadUser());
+    //     console.log(isAuthenticated);
+    // })
+    // useEffect(() => {
+    //     if(isAuthenticated===false){
+    //         navigate('/login', {replace: true})
+    //         console.log('redir');
+    //     }
+    //     console.log(isAuthenticated);
+    // }, [isAuthenticated])
     
 
     return (<Fragment> 
@@ -24,7 +32,7 @@ const Profile = () => {
             <div className='profileContainer'>
                 <div>
                     <h1>My Profile</h1>
-                    <img src={/*user.avatar ?*/ user.avatar.url /*: './logo192.png'*/} alt={user.name} />
+                    <img src={/*user.avatar ?*/ user.avatar.url/* : './logo192.png'*/} alt={user.name} onError={(e) => (e.target.onerror = null, e.target.src = './logo192.png')} />
                     <Link to='/me/update'>Edit Profile</Link>
                 </div>
                 <div>

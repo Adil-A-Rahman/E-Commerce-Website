@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import './UpdateProfile.css'
+import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader/Loader'
 import { useNavigate } from 'react-router-dom'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
@@ -7,7 +8,6 @@ import FaceIcon from '@mui/icons-material/Face'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProfile, clearError, loadUser } from '../../actions/userAction'
 import { useAlert } from 'react-alert'
-import MetaData from '../layout/MetaData'
 import { UPDATE_PROFILE_RESET } from '../../constants/userConstant'
 
 const UpdateProfile = () => {
@@ -16,13 +16,13 @@ const UpdateProfile = () => {
     const alert = useAlert()
     let navigate = useNavigate()
 
-    const { user, loading } = useSelector(state => state.user)
-    const { error, isUpdated } = useSelector((state)=>state.profile)
+    const { user } = useSelector((state) => state.user)
+    const { error, isUpdated, loading } = useSelector((state)=>state.profile)
     
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [avatar, setAvatar] = useState();
-    const [avatarPreview, setAvatarPreview] = useState(user.avatar ?  user.avatar.url :'/logo192.png')
+    const [avatarPreview, setAvatarPreview] = useState(user.avatar ?  user.avatar.url :'../../logo192.png')
     
     const updateProfileSubmit = (e) => {
         e.preventDefault();
@@ -80,10 +80,10 @@ const UpdateProfile = () => {
                             <input type='email' placeholder='Email' required name='email' value={email} onChange={(e)=>{setEmail(e.target.value)}} />
                         </div>
                         <div className='updateProfileImage'>
-                            <img src={avatarPreview} alt='Avatar preview' />
+                            <img src={avatarPreview} alt='Avatar preview' onError={(e) => (e.target.onerror = null, e.target.src = '../../logo192.png')} />
                             <input type='file' name='avatar' accept='image/*' onChange={updateProfileDataChange} />
                         </div>
-                        <input type='submit' value='Update Profile' className='updateProfileBtn' disabled={/*loading ? true : */ false } />
+                        <input type='submit' value='Update Profile' className='updateProfileBtn'/>
                     </form>
                 </div>
             </div>

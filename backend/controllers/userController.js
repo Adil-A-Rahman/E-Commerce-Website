@@ -1,4 +1,5 @@
 const ErrorHander = require("../utils/errorhander");
+const dotenv = require("dotenv");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken")
@@ -111,9 +112,9 @@ exports.forgotPassword = catchAsyncErrors(async(req,res,next)=>{
 
     await user.save({validateBeforeSave:false});
     
-    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`
 
-    const message = "Your password reset token is:\n\n" + resetPasswordUrl + "\n\nIf you haven't requested a password reset email then, please ignore it";
+    const message = "Your password reset token is:\n\n" + resetPasswordUrl + "\n\nIf you haven't requested a password reset email then, please ignore it.";
     
     try{
         await sendEmail({
@@ -151,7 +152,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     })
 
     if(!user){
-        return next(new ErrorHander("Reset Password token has expired or is invalid", 400))
+        return next(new ErrorHander("Reset Password token has expired or invalid", 400))
     } 
 
     if(req.body.password !== req.body.confirmPassword){
@@ -215,7 +216,7 @@ exports.updateProfile = catchAsyncErrors(async(req, res, next)=>{
 
         await cloudinary.v2.uploader.destroy(imageId)
 
-        myCloud = await cloudinary.v2.uploader.upload(req.body.avatar,{
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
             folder: "avatars",
             width: 150,
             crop: 'scale'

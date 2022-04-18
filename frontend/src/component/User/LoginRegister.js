@@ -73,6 +73,7 @@ const LoginRegister = () => {
         }
         if(isAuthenticated){
             navigate('/account',{replace: true})
+            console.log('login page');
         }
     }, [dispatch, error, alert, navigate, isAuthenticated])
     
@@ -113,7 +114,7 @@ const LoginRegister = () => {
                             <LockOpenIcon />
                             <input type='password' placeholder='Password' required value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)}/>
                         </div>
-                        <Link to='/password/forget'> Forget Password ?</Link>
+                        <Link to='/password/forgot'> Forget Password ?</Link>
                         <input className='loginBtn' type='submit' value='LOGIN' />
                     </form>
                     <form className='registerForm' ref={registerTab} encType='multipart/form-data' onSubmit={registerSubmit}>
@@ -133,7 +134,7 @@ const LoginRegister = () => {
                             <img src={avatarPreview} alt='Avatar preview' />
                             <input type='file' name='avatar' accept='image/*' onChange={registerDataChange} />
                         </div>
-                        <input type='submit' value='Register' className='registerBtn' disabled={/*loading ? true : */ false } />
+                        <input type='submit' value='Register' className='registerBtn' />
                     </form>
                 </div>
             </div>
