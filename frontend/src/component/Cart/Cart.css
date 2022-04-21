@@ -1,0 +1,116 @@
+.emptyCart {
+    margin: auto;
+    height: 50vh;
+    padding: 10vmax;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.emptyCart > svg {
+    font-size: 5vmax;
+}
+
+.emptyCart >p {
+    margin-top: 0.5vmax ;
+    font-size: 2vmax;
+}
+
+.emptyCart > a {
+    margin-top: 1vmax;
+    background-color: tomato;
+    color: white;
+    text-decoration: none;
+    font: 400 1vmax 'Roboto';
+    padding: 1vmax 3vmax;
+    border: none;
+    cursor: pointer;
+}
+
+
+.cartPage {
+    padding: 5vmax;
+}
+
+.cartHeader {
+    background-color: tomato;
+    width: 90%;
+    box-sizing: border-box;
+    margin: auto;
+    color: white;
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    font: 300 0.7vmax 'Roboto';
+}
+
+.cartHeader > p {
+    margin: 10px;
+}
+
+.cartHeader > p:last-child {
+    text-align: end;
+}
+
+.cartGrossTotal {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+}
+
+.cartGrossTotalBox {
+    border-top: 3px solid tomato;
+    margin: 1vmax 4vmax 1vmax 2vmax;
+    box-sizing: border-box;
+    justify-content: space-between;
+    display: flex;
+    font: 300 1vmax 'Roboto';
+    padding: 2vmax 1vmax 2vmax 0.5vmax;
+}
+
+.checkOutBtn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.checkOutBtn > button {
+    background-color: tomato;
+    color: white;
+    border: none;
+    padding: 0.8vmax 4vmax;
+    margin: 1vmax 4vmax;
+    cursor: pointer;
+    width: 50%;
+    font: 300 0.8vmax 'Roboto';
+    border-radius: 30px;
+}
+
+@media screen and (max-width: 600px) {
+    .cartPage {
+        padding: 0;
+        min-height: 60vh;
+    }
+
+    .cartHeader {
+        width: 100%;
+        font: 300 1.7vmax 'Roboto';
+        grid-template-columns: 3fr 1fr 1fr;
+    }
+    
+
+    .cartGrossTotal {
+        display: grid;
+        grid-template-columns: 0fr 2fr;
+    }
+    
+    .cartGrossTotalBox {
+        padding: 2vmax;
+        font: 300 2vmax 'Roboto';
+    }
+
+    .checkOutBtn > button {
+        padding: 2vmax 4vmax;
+        width: 100%;
+        font: 300 2vmax 'Roboto';
+    }
+}

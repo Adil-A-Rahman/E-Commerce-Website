@@ -73,7 +73,6 @@ const LoginRegister = () => {
         }
         if(isAuthenticated){
             navigate('/account',{replace: true})
-            console.log('login page');
         }
     }, [dispatch, error, alert, navigate, isAuthenticated])
     
