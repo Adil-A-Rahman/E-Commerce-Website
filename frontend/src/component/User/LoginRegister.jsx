@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useState, useEffect } from 'react'
 import './LoginRegister.css'
 import Loader from '../layout/Loader/Loader'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import LockOpenIcon from '@mui/icons-material/LockOpen'
 import FaceIcon from '@mui/icons-material/Face'
@@ -13,9 +13,12 @@ import MetaData from '../layout/MetaData'
 const LoginRegister = () => {
     const dispatch = useDispatch()
     const alert = useAlert()
-    let navigate = useNavigate()
+    const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
 
     const {error, loading, isAuthenticated} = useSelector(state => state.user )
+
+    const redirect = searchParams.get('redirect')
 
     const loginTab = useRef(null)
     const registerTab = useRef(null)
@@ -71,7 +74,9 @@ const LoginRegister = () => {
             alert.error(error)
             dispatch(clearError())
         }
-        if(isAuthenticated){
+        if(isAuthenticated && redirect){
+            navigate(`/${redirect}`)
+        }else if(isAuthenticated){
             navigate('/account',{replace: true})
         }
     }, [dispatch, error, alert, navigate, isAuthenticated])

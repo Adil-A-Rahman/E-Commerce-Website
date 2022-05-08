@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { useSelector } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/userAction';
 import WebFont from "webfontloader";
 import './App.css';
+// import axios from "axios";
+
 //Site wide HTML import
 import Header from "./component/layout/Header/Header";
 import UserOptions from './component/layout/Header/UserOptions'
@@ -15,6 +17,7 @@ import ProductDetails from './component/Product/ProductDetails'
 import Products from './component/Product/Products'
 import Search from './component/Product/Search'
 import ProtectedRoute from './component/Route/ProtectedRoute';
+import ShippingRoute from './component/Route/ShippingRoute';
 import LoginRegister from './component/User/LoginRegister';
 import Profile from './component/User/Profile'
 import UpdateProfile from './component/User/UpdateProfile';
@@ -22,12 +25,16 @@ import UpdatePassword from './component/User/UpdatePassword';
 import ForgotPassword from './component/User/ForgotPassword';
 import ResetPassword from './component/User/ResetPassword';
 import Cart from './component/Cart/Cart' 
+import Shipping from './component/Cart/Shipping'
+import ConfirmOrder from './component/Cart/ConfirmOrder'
+import StripeContainer from "./StripeContainer";
+// import Payment from './component/Cart/Payment'
 
 function App() {
 
     const { isAuthenticated, user } = useSelector(state => state.user)
 
-    React.useEffect(async ()=>{
+    useEffect(async ()=>{
         WebFont.load({
             google:{
                 families:["Roboto", "Droid Sans", "Chilanka"]
@@ -56,6 +63,11 @@ function App() {
                     <Route path='/account' element={<Profile/>} />
                     <Route path='/me/update' element={<UpdateProfile/>} />
                     <Route path='/password/update' element={<UpdatePassword/>} />
+                </Route>
+                <Route element={<ShippingRoute/>} >
+                    <Route path='/shipping' element={<Shipping/>} />
+                    <Route path='/order/confirm' element={<ConfirmOrder/>} />
+                    <Route path='/process/payment' element={<StripeContainer/>} />
                 </Route>
             </Routes>
             <Footer />

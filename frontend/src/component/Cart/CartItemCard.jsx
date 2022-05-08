@@ -25,8 +25,8 @@ const CartItemCard = ({ item }) => {
     }
 
     return <Fragment>
-        <div class='cartContainer' key={item.product}>
-            <div class='CartItemCard'>
+        <div className='cartContainer' key={item.product}>
+            <div className='CartItemCard'>
                 <img src={item.image} alt='ssa'/>
                 <div>
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
@@ -34,7 +34,7 @@ const CartItemCard = ({ item }) => {
                     <p onClick={()=>{deleteCartItems(item.product)}}>Remove</p>
                 </div>
             </div>
-            <div class='cartInput'>
+            <div className='cartInput'>
                 <button onClick={()=>decreaseQuantity(item.product, item.quantity)}>-</button>
                 <input type='number' value={item.quantity} readOnly />
                 <button onClick={()=>increaseQuantity(item.product, item.quantity, item.stock)}>+</button>

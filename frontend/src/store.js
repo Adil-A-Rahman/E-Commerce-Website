@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { productReducer, productDetailsReducer } from './reducers/productReducer';
 import { forgotPasswordReducer, profileReducer, userReducer } from './reducers/userReducer'
 import { cartReducer } from './reducers/cartReducer';
+import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer, orderReducer } from "./reducers/orderReducer";
 
 const reducer = combineReducers({
     products: productReducer,
@@ -11,12 +12,18 @@ const reducer = combineReducers({
     user: userReducer,
     profile: profileReducer,
     forgotPassword: forgotPasswordReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    newOrder: newOrderReducer,
+    myOrders: myOrdersReducer,
+    orderDetails: orderDetailsReducer,
+    allOrders: allOrdersReducer,
+    order: orderReducer
 });
 
 let initialState = {
-    cart: {
-        cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []    // If items present then populate store else leave emptry
+    cart: {         // If items present then populate store from local storage else leave empty    VV
+        cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
+        shippingInfo: localStorage.getItem('shippingInfo') ? JSON.parse(localStorage.getItem('shippingInfo')) : []
     }
 };
 

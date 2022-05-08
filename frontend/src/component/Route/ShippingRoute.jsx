@@ -11,9 +11,9 @@ const useAuth = () =>{
 const ProtectedRoute = () => {
 
     const {loading} = useSelector((state)=> state.user)
-    const isAuth = useAuth();
+    const isAuth = useAuth();    
     // Return <Outlet/> if loading is FALSE and auth is TRUE; return <navigate...> if loading and auth is false; if loading is not false return loader  
-    return loading===false ? isAuth ? <Outlet/> : <Navigate replace={true} to='/login'/> : <Loader/>
+    return loading===false ? isAuth ? <Outlet/> : <Navigate replace={true} to='/login?redirect=shipping'/> : <Loader/>
 }
 
 export default ProtectedRoute

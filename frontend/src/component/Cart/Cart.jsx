@@ -4,11 +4,22 @@ import { useSelector } from 'react-redux'
 import CartItemCard from './CartItemCard'
 import Typography from '@mui/material/Typography';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCartTwoTone';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Cart = () => {
 
-    const { cartItems } = useSelector((state)=>state.cart) 
+    const navigate = useNavigate()
+    const { cartItems } = useSelector((state)=>state.cart)
+    const { isAuthenticated } = useSelector((state)=> state.user)
+
+    const checkOutHandler = () => {
+        // if(!isAuthenticated){
+            navigate('/shipping')
+        // }
+        // else{
+        //     navigate('/login?redirect=shipping')
+        // }
+    }
 
     return <Fragment>{cartItems.length === 0 ? (
         <div className='emptyCart'>
@@ -17,8 +28,8 @@ const Cart = () => {
             <Link to='/products'>View Products</Link>
         </div>
         ) : <Fragment>
-        <div class='cartPage'>
-            <div class='cartHeader'>
+        <div className='cartPage'>
+            <div className='cartHeader'>
                 <p>Product</p>
                 <p>Quantity</p>
                 <p>Subtotal</p>
@@ -34,7 +45,7 @@ const Cart = () => {
                 </div>
                 <div></div>
                 <div className='checkOutBtn'>
-                    <button>Check Out </button>
+                    <button onClick={checkOutHandler} >Check Out </button>
                 </div>
             </div>
         </div>
