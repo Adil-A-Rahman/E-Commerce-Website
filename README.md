@@ -106,4 +106,3 @@ To run this project, you will need to add the following environment variables to
 ## Authors
 
 - [@Adil-A-Rahman](https://github.com/Adil-A-Rahman)
-- [@gurushabadsaluja](https://github.com/gurushabadsaluja)
