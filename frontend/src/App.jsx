@@ -5,7 +5,6 @@ import store from './store';
 import { loadUser } from './actions/userAction';
 import WebFont from "webfontloader";
 import './App.css';
-// import axios from "axios";
 
 //Site wide HTML import
 import Header from "./component/layout/Header/Header";
